@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace cloinger_kevin_stuff
+namespace cloinger_kevin_project
 {
     class Program
     {
