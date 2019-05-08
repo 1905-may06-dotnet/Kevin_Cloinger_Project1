@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/sarasfox/revaturre/cloinger_kevin_stuff/cloinger_kevin_stuff.csproj": {}
+    "/home/sarasfox/revaturre/cloinger_kevin_project0/cloinger_kevin_stuff.csproj": {}
   },
   "projects": {
-    "/home/sarasfox/revaturre/cloinger_kevin_stuff/cloinger_kevin_stuff.csproj": {
+    "/home/sarasfox/revaturre/cloinger_kevin_project0/cloinger_kevin_stuff.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sarasfox/revaturre/cloinger_kevin_stuff/cloinger_kevin_stuff.csproj",
+        "projectUniqueName": "/home/sarasfox/revaturre/cloinger_kevin_project0/cloinger_kevin_stuff.csproj",
         "projectName": "cloinger_kevin_stuff",
-        "projectPath": "/home/sarasfox/revaturre/cloinger_kevin_stuff/cloinger_kevin_stuff.csproj",
+        "projectPath": "/home/sarasfox/revaturre/cloinger_kevin_project0/cloinger_kevin_stuff.csproj",
         "packagesPath": "/home/sarasfox/.nuget/packages/",
-        "outputPath": "/home/sarasfox/revaturre/cloinger_kevin_stuff/obj/",
+        "outputPath": "/home/sarasfox/revaturre/cloinger_kevin_project0/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/share/dotnet/sdk/NuGetFallbackFolder"
