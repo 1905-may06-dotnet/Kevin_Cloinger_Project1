@@ -1,0 +1,14 @@
+/home/sarasfox/c#/pizza/PizzaBox.Data/bin/Debug/netcoreapp2.2/PizzaBox.Data.deps.json
+/home/sarasfox/c#/pizza/PizzaBox.Data/bin/Debug/netcoreapp2.2/PizzaBox.Data.runtimeconfig.json
+/home/sarasfox/c#/pizza/PizzaBox.Data/bin/Debug/netcoreapp2.2/PizzaBox.Data.runtimeconfig.dev.json
+/home/sarasfox/c#/pizza/PizzaBox.Data/bin/Debug/netcoreapp2.2/PizzaBox.Data.dll
+/home/sarasfox/c#/pizza/PizzaBox.Data/bin/Debug/netcoreapp2.2/PizzaBox.Data.pdb
+/home/sarasfox/c#/pizza/PizzaBox.Data/bin/Debug/netcoreapp2.2/PizzaBox.Domain.dll
+/home/sarasfox/c#/pizza/PizzaBox.Data/bin/Debug/netcoreapp2.2/PizzaBox.Domain.pdb
+/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netcoreapp2.2/PizzaBox.Data.csprojAssemblyReference.cache
+/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netcoreapp2.2/PizzaBox.Data.csproj.CoreCompileInputs.cache
+/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netcoreapp2.2/PizzaBox.Data.AssemblyInfoInputs.cache
+/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netcoreapp2.2/PizzaBox.Data.AssemblyInfo.cs
+/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netcoreapp2.2/PizzaBox.Data.csproj.CopyComplete
+/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netcoreapp2.2/PizzaBox.Data.dll
+/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netcoreapp2.2/PizzaBox.Data.pdb

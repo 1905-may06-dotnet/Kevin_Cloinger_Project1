@@ -1,0 +1,12 @@
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netstandard2.0/PizzaBox.Domain.csprojAssemblyReference.cache
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netstandard2.0/PizzaBox.Domain.csproj.CoreCompileInputs.cache
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netstandard2.0/PizzaBox.Domain.AssemblyInfoInputs.cache
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netstandard2.0/PizzaBox.Domain.AssemblyInfo.cs
+/home/sarasfox/c#/pizza/PizzaBox.Domain/bin/Debug/netstandard2.0/PizzaBox.Domain.deps.json
+/home/sarasfox/c#/pizza/PizzaBox.Domain/bin/Debug/netstandard2.0/PizzaBox.Domain.dll
+/home/sarasfox/c#/pizza/PizzaBox.Domain/bin/Debug/netstandard2.0/PizzaBox.Domain.pdb
+/home/sarasfox/c#/pizza/PizzaBox.Domain/bin/Debug/netstandard2.0/PizzaBox.Data.dll
+/home/sarasfox/c#/pizza/PizzaBox.Domain/bin/Debug/netstandard2.0/PizzaBox.Data.pdb
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netstandard2.0/PizzaBox.Domain.csproj.CopyComplete
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netstandard2.0/PizzaBox.Domain.dll
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netstandard2.0/PizzaBox.Domain.pdb

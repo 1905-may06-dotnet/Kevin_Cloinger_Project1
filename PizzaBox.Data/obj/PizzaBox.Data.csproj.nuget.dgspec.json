@@ -1,0 +1,120 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/sarasfox/c#/pizza/PizzaBox.Data/PizzaBox.Data.csproj": {}
+  },
+  "projects": {
+    "/home/sarasfox/c#/pizza/PizzaBox.Data/PizzaBox.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/sarasfox/c#/pizza/PizzaBox.Data/PizzaBox.Data.csproj",
+        "projectName": "PizzaBox.Data",
+        "projectPath": "/home/sarasfox/c#/pizza/PizzaBox.Data/PizzaBox.Data.csproj",
+        "packagesPath": "/home/sarasfox/.nuget/packages/",
+        "outputPath": "/home/sarasfox/c#/pizza/PizzaBox.Data/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/sarasfox/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "/home/sarasfox/c#/pizza/PizzaBox.Domain/PizzaBox.Domain.csproj": {
+                "projectPath": "/home/sarasfox/c#/pizza/PizzaBox.Domain/PizzaBox.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "/home/sarasfox/c#/pizza/PizzaBox.Domain/PizzaBox.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/sarasfox/c#/pizza/PizzaBox.Domain/PizzaBox.Domain.csproj",
+        "projectName": "PizzaBox.Domain",
+        "projectPath": "/home/sarasfox/c#/pizza/PizzaBox.Domain/PizzaBox.Domain.csproj",
+        "packagesPath": "/home/sarasfox/.nuget/packages/",
+        "outputPath": "/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/home/sarasfox/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

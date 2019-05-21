@@ -1,0 +1,9 @@
+/home/sarasfox/c#/pizza/PizzaBox.Domain/bin/Debug/netcoreapp2.2/PizzaBox.Domain.deps.json
+/home/sarasfox/c#/pizza/PizzaBox.Domain/bin/Debug/netcoreapp2.2/PizzaBox.Domain.dll
+/home/sarasfox/c#/pizza/PizzaBox.Domain/bin/Debug/netcoreapp2.2/PizzaBox.Domain.pdb
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.csproj.CoreCompileInputs.cache
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.AssemblyInfoInputs.cache
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.AssemblyInfo.cs
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.dll
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.pdb
+/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.csprojAssemblyReference.cache
