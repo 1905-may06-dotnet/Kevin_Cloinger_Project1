@@ -15,7 +15,6 @@ namespace PizzaBox.Data
         private string crust, size, toppings;
         private decimal cost;
         private int count;
-        //public string[] toppings; 
         public Pizza(String size, String crust, String toppings){
             this.size = size;
             this.crust = crust;
@@ -74,7 +73,6 @@ namespace PizzaBox.Data
     }
     public class User{
         private string email, pass;
-        //private User user = new User("test","test");
         
         public User(string Email, string Pass){
             this.email = Email;
@@ -181,6 +179,7 @@ namespace PizzaBox.Data
             return this.Id;
         }
         public void Update(){
+            context.Order.Update(this);
             context.SaveChanges();
         }
         public List<Pizza> GetPizzas(){
@@ -200,14 +199,12 @@ namespace PizzaBox.Data
             {
                 return true;
             }
-            Console.WriteLine("CheckPizzaLimits");
             return false;
         }
         public bool CheckCost(){
             if(BizLogic.CheckMaxCost(this.Cost)){
                 return true;
             }
-            Console.WriteLine("CheckMaxCost");
             return false;
         }
     }

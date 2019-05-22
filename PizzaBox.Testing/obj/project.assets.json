@@ -7042,7 +7042,8 @@
       "MSTest.TestFramework >= 1.4.0",
       "Microsoft.NET.Test.Sdk >= 16.0.1",
       "Microsoft.NETCore.App >= 2.2.0",
-      "PizzaBox.Client >= 1.0.0"
+      "PizzaBox.Client >= 1.0.0",
+      "PizzaBox.Data >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -7052,11 +7053,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/sarasfox/c#/pizza/PizzaBox.Testing/PizzaBox.Testing.csproj",
+      "projectUniqueName": "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Testing/PizzaBox.Testing.csproj",
       "projectName": "PizzaBox.Testing",
-      "projectPath": "/home/sarasfox/c#/pizza/PizzaBox.Testing/PizzaBox.Testing.csproj",
+      "projectPath": "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Testing/PizzaBox.Testing.csproj",
       "packagesPath": "/home/sarasfox/.nuget/packages/",
-      "outputPath": "/home/sarasfox/c#/pizza/PizzaBox.Testing/obj/",
+      "outputPath": "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Testing/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"
@@ -7073,8 +7074,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "/home/sarasfox/c#/pizza/PizzaBox.Client/PizzaBox.Client.csproj": {
-              "projectPath": "/home/sarasfox/c#/pizza/PizzaBox.Client/PizzaBox.Client.csproj"
+            "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Client/PizzaBox.Client.csproj": {
+              "projectPath": "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Client/PizzaBox.Client.csproj"
+            },
+            "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Data/PizzaBox.Data.csproj": {
+              "projectPath": "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Data/PizzaBox.Data.csproj"
             }
           }
         }

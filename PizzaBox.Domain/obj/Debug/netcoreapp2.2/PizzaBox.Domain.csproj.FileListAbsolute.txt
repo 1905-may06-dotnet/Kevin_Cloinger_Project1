@@ -7,3 +7,12 @@
 /home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.dll
 /home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.pdb
 /home/sarasfox/c#/pizza/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.csprojAssemblyReference.cache
+/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/bin/Debug/netcoreapp2.2/PizzaBox.Domain.deps.json
+/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/bin/Debug/netcoreapp2.2/PizzaBox.Domain.dll
+/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/bin/Debug/netcoreapp2.2/PizzaBox.Domain.pdb
+/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.csprojAssemblyReference.cache
+/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.csproj.CoreCompileInputs.cache
+/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.AssemblyInfoInputs.cache
+/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.AssemblyInfo.cs
+/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.dll
+/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/obj/Debug/netcoreapp2.2/PizzaBox.Domain.pdb

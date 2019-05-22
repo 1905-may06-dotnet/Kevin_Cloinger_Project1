@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/sarasfox/c#/pizza/PizzaBox.Domain/PizzaBox.Domain.csproj": {}
+    "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/PizzaBox.Domain.csproj": {}
   },
   "projects": {
-    "/home/sarasfox/c#/pizza/PizzaBox.Domain/PizzaBox.Domain.csproj": {
+    "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/PizzaBox.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/sarasfox/c#/pizza/PizzaBox.Domain/PizzaBox.Domain.csproj",
+        "projectUniqueName": "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/PizzaBox.Domain.csproj",
         "projectName": "PizzaBox.Domain",
-        "projectPath": "/home/sarasfox/c#/pizza/PizzaBox.Domain/PizzaBox.Domain.csproj",
+        "projectPath": "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/PizzaBox.Domain.csproj",
         "packagesPath": "/home/sarasfox/.nuget/packages/",
-        "outputPath": "/home/sarasfox/c#/pizza/PizzaBox.Domain/obj/",
+        "outputPath": "/home/sarasfox/revaturre/cloinger_kevin_project0/PizzaBox.Domain/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/share/dotnet/sdk/NuGetFallbackFolder"

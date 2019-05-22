@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using System.Reflection.Metadata;
+﻿using System.Reflection.Metadata;
 using System.Linq;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,6 @@ namespace PizzaBox.Client {
             var user = new User ("test", "test");
             CheckArgs(args);
             LogIn (out user);
-            // fix below
             List<Location> locations = new List<Location> ();
             var l = new Location ("Uptown");
                 locations.Add (l);
@@ -89,10 +87,12 @@ namespace PizzaBox.Client {
                 if(order.CheckCost()){
                     pizza = OrderPizza ();
                     order.Pizzas.Add (pizza);
+                    order.Cost = pizza.Cost;
+                    pizza.Save(oID);
                     if(order.CheckPizzaLimits()){
                         Console.WriteLine("sorry money bags that is ONE to many.");
                     }else{
-                        pizza.Save(oID);
+                        
                         Console.WriteLine ($"So is {order.Pizzas.Count} enough.(Y/N)");
                         iii = Console.ReadLine ();
                     }
@@ -157,6 +157,7 @@ namespace PizzaBox.Client {
                 input=Console.ReadLine();
                 if(input=="n"||input=="N"){Console.WriteLine("SAD");}
             }while(input!="y"&&input!="Y");
+            order.Cost = order.Cost;
             order.Confirmed = true;
             order.Time = DateTime.Now;
             order.Update();
@@ -164,8 +165,9 @@ namespace PizzaBox.Client {
         static void OrderHistory(User user){
             List<Order> orders = user.GetOrders();
             foreach(Order order in orders){ 
-                if(order.Confirmed){
-                    Console.WriteLine ($"You ordered pizzas form {order.Location} on {order.Time}");
+                if(order.Confirmed&&order!=null){
+                    Console.WriteLine(order.Cost.ToString());
+                    Console.WriteLine ($"You ordered pizzas from {order.Location} on {order.Time}");
                     Console.WriteLine($"You paided the low cost of {order.Cost}");
                     Console.WriteLine ("This order inculed the following pizzas.");
                     List<Pizza> pizzas = order.GetPizzas();
@@ -177,19 +179,23 @@ namespace PizzaBox.Client {
                         Console.Write (pizza.Toppings);
                         Console.WriteLine ("");
                     }
-                    Console.WriteLine($"The totel for the order was ${order.Cost}");
+                    Console.WriteLine($"The total for the order was ${order.Cost}");
                 }
             }
         }
         static void CheckArgs(String[] args){
+            var user = new User ("test", "test");
             if(args!=null){
                 for(int i=0;i<args.Length;i++){
                     if(args[i] == "-l"&&i+1<=args.Length){
                         ShowSales(args[i+1]);
                     }else if(args[i]=="-s"){
                         Set.SetS();
+                    }else if(args[i]=="-H"){
+                        LogIn(out user);
+                        OrderHistory(user);
+                        System.Environment.Exit(1);
                     }
-
                 }
             }
         }

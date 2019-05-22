@@ -11,7 +11,8 @@
           "MSTest.TestAdapter": "1.4.0",
           "MSTest.TestFramework": "1.4.0",
           "Microsoft.NET.Test.Sdk": "16.0.1",
-          "PizzaBox.Client": "1.0.0"
+          "PizzaBox.Client": "1.0.0",
+          "PizzaBox.Data": "1.0.0"
         },
         "runtime": {
           "PizzaBox.Testing.dll": {}

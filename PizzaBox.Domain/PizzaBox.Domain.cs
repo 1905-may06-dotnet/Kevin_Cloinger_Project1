@@ -6,7 +6,6 @@ namespace PizzaBox.Domain
     public class BizLogic {
         static bool SetS=false;
         static public bool CheckAllowOrderAtSameLocation(DateTime OrderTime) {
-            Console.WriteLine(SetS);
             if(SetS){
                 return true;
             }
@@ -35,14 +34,16 @@ namespace PizzaBox.Domain
             return false;
         }
         static public bool CheckNumberOfPizzas(int number){
-            if (number <=100){
+            if (number >=100){
                 return true;
             }
-             Console.WriteLine("three");
             return false;
         }
         static public bool CheckMaxCost(decimal cost){
-            return true;
+            if(cost<5000m){
+                return true;
+            }
+            return false;
         }
         static public void SetCommand(){
             SetS = true;
