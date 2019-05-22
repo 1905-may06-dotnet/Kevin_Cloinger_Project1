@@ -33,7 +33,7 @@ namespace PizzaBox.Client {
             input.ToLowerInvariant();
             if (input == "y") {
                 Console.WriteLine ("So you new here.");
-                Console.Write ("What is you Email?   ");
+                Console.Write ("What is your Email?   ");
                 string userName = Console.ReadLine ();
                 Console.Write ("Kool now I need a good password?  ");
                 string password = Console.ReadLine ();
@@ -90,14 +90,14 @@ namespace PizzaBox.Client {
                     order.Cost = pizza.Cost;
                     pizza.Save(oID);
                     if(order.CheckPizzaLimits()){
-                        Console.WriteLine("sorry money bags that is ONE to many.");
+                        Console.WriteLine("sorry money bags that is ONE too many.");
                     }else{
                         
                         Console.WriteLine ($"So is {order.Pizzas.Count} enough.(Y/N)");
                         iii = Console.ReadLine ();
                     }
                 }else{
-                    Console.WriteLine("Sorry we know your hungery but we limit orders to 100 pizzas.");
+                    Console.WriteLine("Sorry we know your hungry but we limit orders to 100 pizzas.");
                 }
             }while(iii != "y" && iii != "Y");
             order.Update();
@@ -112,13 +112,13 @@ namespace PizzaBox.Client {
                 size = size.ToLower();
             } while (size != "small" && size != "medium" && size != "large" && size != "xl" && size != "phat");
             do {
-                Console.WriteLine ("What crust type would you like Hand tossed, thin and thick");
+                Console.WriteLine ("What crust type would you like Hand tossed, thin or thick");
                 crust = Console.ReadLine ();
                 crust = crust.ToLower();
             } while (crust != "hand" && crust != "tossed" && crust != "thin" && crust != "thick" && crust != "hand tossed");
             for (int i = 0; i < 5; i++) {
                 if(i>=2){
-                    Console.Write ("do you whant more on the pizza? (Y/N)");
+                    Console.Write ("do you want more on the pizza? (Y/N)");
                     input = Console.ReadLine ();
                     if (input != "Y" && input != "y") {
                         break;
@@ -139,7 +139,7 @@ namespace PizzaBox.Client {
         }
         static void ShowOrder (Order order) {
             Console.WriteLine ($"Your are {order.Customer.Email}");
-            Console.WriteLine ($"You are ordering pizza form the {order.Location} location of PizzeBox");
+            Console.WriteLine ($"You are ordering pizza form the {order.Location} location of PizzaBox");
             foreach (Pizza pizza in order.Pizzas) {
                 Console.WriteLine ($"The crust you picked is {pizza.Crust}");
                 Console.WriteLine ($"The size of your master piece is {pizza.Size}");
@@ -152,7 +152,7 @@ namespace PizzaBox.Client {
         static void ConfirmOrder(Order order){
             string input;
             do{
-                Console.WriteLine("If ever thing look great please confirm your order.");
+                Console.WriteLine("If every thing look great please confirm your order.");
                 Console.WriteLine("So we can start creating the cure for your case of hangry");
                 input=Console.ReadLine();
                 if(input=="n"||input=="N"){Console.WriteLine("SAD");}
@@ -168,7 +168,7 @@ namespace PizzaBox.Client {
                 if(order.Confirmed&&order!=null){
                     Console.WriteLine(order.Cost.ToString());
                     Console.WriteLine ($"You ordered pizzas from {order.Location} on {order.Time}");
-                    Console.WriteLine($"You paided the low cost of {order.Cost}");
+                    Console.WriteLine($"You paid the low cost of {order.Cost}");
                     Console.WriteLine ("This order inculed the following pizzas.");
                     List<Pizza> pizzas = order.GetPizzas();
                     foreach(Pizza pizza in pizzas){
