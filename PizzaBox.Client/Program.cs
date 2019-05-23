@@ -81,14 +81,14 @@ namespace PizzaBox.Client {
             var order = new Order ();
             order.Location = location;
             order.Customer = user;
-            int oID = order.Save();
             string iii="Y";
-            do{Pizza pizza;
+            do{
+                Pizza pizza;
                 if(order.CheckCost()){
-                    pizza = OrderPizza ();
+                    pizza = OrderPizza();
+                    Console.WriteLine(pizza.Crust);
                     order.Pizzas.Add (pizza);
                     order.Cost = pizza.Cost;
-                    pizza.Save(oID);
                     if(order.CheckPizzaLimits()){
                         Console.WriteLine("sorry money bags that is ONE too many.");
                     }else{

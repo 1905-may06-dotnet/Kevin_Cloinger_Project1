@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace PizzaBox.Data{
     public class UserDB : DbContext{
         public virtual DbSet<User> User {get;set;}

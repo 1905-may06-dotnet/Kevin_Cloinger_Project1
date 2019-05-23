@@ -64,12 +64,6 @@ namespace PizzaBox.Data
             get => toppings;
             set => toppings = value;
         }
-        public void Save(int ID){
-            this.OrderId = ID;
-            var context = new UserDB();
-            context.Pizza.Add(this);
-            context.SaveChanges();
-        }
     }
     public class User{
         private string email, pass;
@@ -128,6 +122,9 @@ namespace PizzaBox.Data
         }
         public bool CanOrder(string location){
             var order = GetLastOrder();
+            if(order==null){
+                return true;
+            }
             if(BizLogic.CheckAllowOrderAtSameLocation(order.Time)&&
                BizLogic.CheckAllowOrderOnlySameLocation(order.Time,location,order.Location)
             ){return true;}
@@ -168,16 +165,17 @@ namespace PizzaBox.Data
             set => cost = cost+value;
         }
         public DateTime Time {get;set;}
-        public List<Pizza> Pizzas = new List<Pizza>(); 
+        public IList<Pizza> Pizzas {get;set;} = new List<Pizza>();
         public String Location{get => location;set=>location=value;}
         public User Customer{get=>customer;set=>customer=value;}
         private UserDB context = new UserDB();
-        public int Save(){
-            context.Order.Add(this);
-            context.User.Attach(this.customer);
-            context.SaveChanges();
-            return this.Id;
-        }
+
+        //public void Save(){
+        //     context.Order.Add(this);
+        //     context.User.Attach(this.customer);
+        //     context.SaveChanges();
+        //     return this.Id;
+        // }
         public void Update(){
             context.Order.Update(this);
             context.SaveChanges();
