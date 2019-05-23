@@ -11,11 +11,7 @@ namespace PizzaBox.Client {
             var user = new User ("test", "test");
             CheckArgs(args);
             LogIn (out user);
-            List<Location> locations = new List<Location> ();
-            var l = new Location ("Uptown");
-                locations.Add (l);
-                l = new Location ("Downtown");
-                locations.Add (l);
+            var locations = Setup();
             String location = PickALocation (user, locations);
             if(user.CanOrder(location)){
                 Order order = MakeOrder (user, location);
@@ -210,6 +206,14 @@ namespace PizzaBox.Client {
                 }
             }
             Console.WriteLine($"The total sales for {locationName} are {total}");
+        }
+        static List<Location> Setup(){
+            var locations = new List<Location> ();
+            var l = new Location ("Uptown");
+                locations.Add (l);
+                l = new Location ("Downtown");
+                locations.Add (l);
+            return locations;
         }
     }
 }
