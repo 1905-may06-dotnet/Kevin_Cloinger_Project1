@@ -9,24 +9,21 @@ namespace PizzaBox.Client {
     public class Program {
         public static void Main (string[] args) {
             var user = new User ("test", "test");
-            CheckArgs(args);
+            Helpers.CheckArgs(args);
             LogIn (out user);
-            List<Location> locations = new List<Location> ();
-            var l = new Location ("Uptown");
-                locations.Add (l);
-                l = new Location ("Downtown");
-                locations.Add (l);
+            var locations = Helpers.Setup();
             String location = PickALocation (user, locations);
             if(user.CanOrder(location)){
                 Order order = MakeOrder (user, location);
-                ShowOrder (order);
+                Helpers.ShowOrder (order);
                 ConfirmOrder(order);
             }
+
             Console.WriteLine("Would you like to see your history");
             String input = Console.ReadLine();
-            if (input == "y"){OrderHistory(user);}
+            if (input == "y"){Helpers.OrderHistory(user);}
         }
-        static void LogIn (out User user) {
+        internal static void LogIn (out User user) {
             Console.WriteLine ("Welcome to pizzaBox");
             Console.Write ("Are you new Here(Y/N)?");
             string input = Console.ReadLine ();
@@ -108,13 +105,11 @@ namespace PizzaBox.Client {
             var toppings = new string[5];
             do {
                 Console.WriteLine ("What size would you like your to be pizza Small, Medium, Large, XL and Phat.");
-                size = Console.ReadLine ();
-                size = size.ToLower();
+                size = Console.ReadLine ().ToLower();
             } while (size != "small" && size != "medium" && size != "large" && size != "xl" && size != "phat");
             do {
                 Console.WriteLine ("What crust type would you like Hand tossed, thin or thick");
-                crust = Console.ReadLine ();
-                crust = crust.ToLower();
+                crust = Console.ReadLine ().ToLower();
             } while (crust != "hand" && crust != "tossed" && crust != "thin" && crust != "thick" && crust != "hand tossed");
             for (int i = 0; i < 5; i++) {
                 if(i>=2){
@@ -127,8 +122,7 @@ namespace PizzaBox.Client {
                 do {
                     Console.WriteLine ("So what topping do what do you really really want?");
                     Console.WriteLine ("BACON, ham, mushrooms, meat and cheese");
-                    topping = Console.ReadLine ();
-                    topping = topping.ToLower();
+                    topping = Console.ReadLine ().ToLower();
                 } while (topping != "bacon" && topping != "ham" && topping != "mushrooms" && topping != "meat" && topping != "cheese");
                 toppings[i] = topping;
             }
@@ -136,18 +130,6 @@ namespace PizzaBox.Client {
             toppingsOut = toppingsOut.TrimEnd(',');
             var pizza = new Pizza (size, crust, toppingsOut);
             return pizza;
-        }
-        static void ShowOrder (Order order) {
-            Console.WriteLine ($"Your are {order.Customer.Email}");
-            Console.WriteLine ($"You are ordering pizza form the {order.Location} location of PizzaBox");
-            foreach (Pizza pizza in order.Pizzas) {
-                Console.WriteLine ($"The crust you picked is {pizza.Crust}");
-                Console.WriteLine ($"The size of your master piece is {pizza.Size}");
-                Console.WriteLine ($"This pizza cost {pizza.Cost}");
-                Console.Write ("With:");
-                Console.Write (pizza.Toppings);
-                Console.WriteLine ("");
-            }
         }
         static void ConfirmOrder(Order order){
             string input;
@@ -161,55 +143,6 @@ namespace PizzaBox.Client {
             order.Confirmed = true;
             order.Time = DateTime.Now;
             order.Update();
-        }
-        static void OrderHistory(User user){
-            List<Order> orders = user.GetOrders();
-            foreach(Order order in orders){ 
-                if(order.Confirmed&&order!=null){
-                    Console.WriteLine(order.Cost.ToString());
-                    Console.WriteLine ($"You ordered pizzas from {order.Location} on {order.Time}");
-                    Console.WriteLine($"You paid the low cost of {order.Cost}");
-                    Console.WriteLine ("This order inculed the following pizzas.");
-                    List<Pizza> pizzas = order.GetPizzas();
-                    foreach(Pizza pizza in pizzas){
-                        Console.WriteLine ($"The crust you picked is {pizza.Crust}");
-                        Console.WriteLine ($"The size of your master piece is {pizza.Size}");
-                        Console.WriteLine ($"This pizza cost {pizza.Cost}");
-                        Console.Write ("With:");
-                        Console.Write (pizza.Toppings);
-                        Console.WriteLine ("");
-                    }
-                    Console.WriteLine($"The total for the order was ${order.Cost}");
-                }
-            }
-        }
-        static void CheckArgs(String[] args){
-            var user = new User ("test", "test");
-            if(args!=null){
-                for(int i=0;i<args.Length;i++){
-                    if(args[i] == "-l"&&i+1<=args.Length){
-                        ShowSales(args[i+1]);
-                    }else if(args[i]=="-s"){
-                        Set.SetS();
-                    }else if(args[i]=="-H"){
-                        LogIn(out user);
-                        OrderHistory(user);
-                        System.Environment.Exit(1);
-                    }
-                }
-            }
-        }
-        static void ShowSales(String locationName){
-            var location = new Location(locationName);
-            List<Order> orders =location.GetOrders();
-            decimal total =0m;
-            foreach(Order order in orders){
-                if(order.Confirmed){
-                    Console.WriteLine(order.Cost);
-                    total = order.Cost + total;  
-                }
-            }
-            Console.WriteLine($"The total sales for {locationName} are {total}");
         }
     }
 }

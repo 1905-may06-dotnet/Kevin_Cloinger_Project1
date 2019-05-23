@@ -1,9 +1,0 @@
-/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netstandard2.0/PizzaBox.Data.csprojAssemblyReference.cache
-/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netstandard2.0/PizzaBox.Data.csproj.CoreCompileInputs.cache
-/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netstandard2.0/PizzaBox.Data.AssemblyInfoInputs.cache
-/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netstandard2.0/PizzaBox.Data.AssemblyInfo.cs
-/home/sarasfox/c#/pizza/PizzaBox.Data/bin/Debug/netstandard2.0/PizzaBox.Data.deps.json
-/home/sarasfox/c#/pizza/PizzaBox.Data/bin/Debug/netstandard2.0/PizzaBox.Data.dll
-/home/sarasfox/c#/pizza/PizzaBox.Data/bin/Debug/netstandard2.0/PizzaBox.Data.pdb
-/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netstandard2.0/PizzaBox.Data.dll
-/home/sarasfox/c#/pizza/PizzaBox.Data/obj/Debug/netstandard2.0/PizzaBox.Data.pdb
