@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,40 +8,14 @@ using PizzaBox.Domain;
 
 namespace PizzaBox.Data
 {
-    public class Pizza
-    {
+    public class Pizza{
         private string crust, size, toppings;
         private decimal cost;
-        private int count;
         public Pizza(String size, String crust, String toppings){
             this.size = size;
             this.crust = crust;
             this.toppings = toppings;
-            if(size=="small"){
-                cost = cost + 8;
-            } else if (size =="medium"){
-                cost = cost + 10;
-            } else if (size == "large"){
-                cost = cost + 15;
-            } else if (size == "xl"){
-                cost = cost + 20;
-            }else if (size =="phat"){
-                cost = cost + 30;
-            }
-            if(crust=="hand"&&crust=="tossed"&&crust=="hand tossed"){
-                cost = cost*1.2m;
-                cost = cost*1.5m;
-            }
-            count = toppings.Count(s => s.Equals(','))+1;
-            if (count == 2){
-                cost = cost*1.2m;
-            }else if(count == 3){
-                cost = cost*1.4m;
-            }else if(count == 4){
-                cost = cost*1.6m;
-            }else if(count == 5){
-                cost = cost*1.8m;
-            }
+            this.cost = BizLogic.PizzaPrice(size, crust, toppings);
         }
         [Key]
         public int PizzaId{get;set;}
@@ -73,12 +45,10 @@ namespace PizzaBox.Data
     }
     public class User{
         private string email, pass;
-        
         public User(string Email, string Pass){
             this.email = Email;
             this.pass = Pass; 
         }
-
         public void SaveUser(){
             using(UserDB context = new UserDB())
             {
@@ -105,7 +75,6 @@ namespace PizzaBox.Data
                 return false;
             }
         }
-        
         public List<Order> GetOrders(){
             UserDB context = new UserDB();
             var orderQuery = 
@@ -128,6 +97,9 @@ namespace PizzaBox.Data
         }
         public bool CanOrder(string location){
             var order = GetLastOrder();
+            if(order==null){
+                return true;
+            }
             if(BizLogic.CheckAllowOrderAtSameLocation(order.Time)&&
                BizLogic.CheckAllowOrderOnlySameLocation(order.Time,location,order.Location)
             ){return true;}
