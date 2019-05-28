@@ -83,7 +83,6 @@ namespace PizzaBox.Client {
                 Pizza pizza;
                 if(order.CheckCost()){
                     pizza = OrderPizza();
-                    Console.WriteLine(pizza.Crust);
                     order.Pizzas.Add (pizza);
                     order.Cost = pizza.Cost;
                     if(order.CheckPizzaLimits()){

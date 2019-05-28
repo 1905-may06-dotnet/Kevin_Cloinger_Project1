@@ -31,8 +31,11 @@ namespace PizzaBox.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddDistributedMemoryCache();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSession(options => {
+                options.Cookie.Name = "PizzaBox.Session";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +55,7 @@ namespace PizzaBox.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

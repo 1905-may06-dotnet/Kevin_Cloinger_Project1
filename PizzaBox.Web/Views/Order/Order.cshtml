@@ -1,0 +1,15 @@
+@model OrderWeb
+@{
+    ViewData["Title"] = "Order Page";
+}
+@using PizzaBox.Data
+<h1>Order Page</h1>
+<div display=flex>
+    <form asp-controller="Order" asp-action="PickedLocation" method="post" asp-for="Location">
+      @Html.DropDownList("Location",
+        new SelectList(Enum.GetValues(typeof(StoreLocations))),
+        "Select Location",
+        new{@class = "form-control"})
+      <input type="submit" value="Submit">
+    </form>
+</div>
