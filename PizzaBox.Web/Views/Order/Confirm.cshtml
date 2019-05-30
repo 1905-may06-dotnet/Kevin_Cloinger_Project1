@@ -1,0 +1,52 @@
+@using PizzaBox.Web.Models
+@{
+    OrderWeb order = (OrderWeb)ViewData["order"];
+}
+<h1>THANKS</h1>
+<table class="table">
+    <tr>
+        <th scope="col">
+            Crust
+        </th>
+        <th scope="col">
+            Size
+        </th>
+        <th scope="col">
+            Toppings
+        </th>
+        <th scope="col">
+            Price
+        </th>
+        @foreach (var pizza in order.Pizzas)
+        {
+            <tr>
+                <td>
+                    @pizza.Crust
+                </td>
+                <td>
+                    @pizza.Size
+                </td>
+                <td>
+                    @pizza.Toppings
+                </td>
+                <td>
+                    $@pizza.Cost
+                </td>
+            </tr>
+        }
+        <tr>
+            <th>
+                Total: 
+            </th>
+            <td>
+               $@order.Cost
+            </td>
+            <th>
+                On:
+            </th>  
+            <td>
+                @order.Time.ToString()
+            </td>
+        </tr>
+    </tr>
+</table>

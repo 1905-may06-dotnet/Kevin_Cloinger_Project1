@@ -2,7 +2,7 @@ using System.Xml.Schema;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using PizzaBox.Data;
+using PizzaBox.Domain;
 
 namespace PizzaBox.Web.Models{
     public class PizzaWeb : Pizza{
@@ -25,8 +25,7 @@ namespace PizzaBox.Web.Models{
         small,
         medium,
         large,
-        xl,
-        phat
+        xl
     }
     public enum ToppingsTypes{
         bacon,

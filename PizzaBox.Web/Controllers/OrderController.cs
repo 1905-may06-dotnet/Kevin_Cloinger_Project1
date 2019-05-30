@@ -40,10 +40,19 @@ namespace PizzaBox.Web.Controllers
             var pizza = new PizzaWeb(size, crust, toppings);
             OrderWeb order = (OrderWeb)HttpContext.Session.GetObjectFromJson<OrderWeb>("order");
             order.Pizzas.Add (pizza);
-            order.Cost = pizza.Cost;
+            order.Cost = order.Cost + pizza.Cost;
             HttpContext.Session.SetObjectAsJson("order", order);
             Console.WriteLine(order.Cost);
             return RedirectToAction("OrderPizza");
+        }
+        [HttpPost("Confirm")]
+        public IActionResult Confirm(){
+            OrderWeb order = (OrderWeb)HttpContext.Session.GetObjectFromJson<OrderWeb>("order");
+            ViewData["order"] = order;
+            order.Time = DateTime.Now;
+            order.Confirmed = true;
+            order.Save();
+            return View();
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

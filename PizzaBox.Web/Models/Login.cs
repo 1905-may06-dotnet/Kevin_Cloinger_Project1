@@ -1,7 +1,7 @@
 using System.Xml.Schema;
 using System;
 using System.ComponentModel.DataAnnotations;
-using PizzaBox.Data;
+using PizzaBox.Domain;
 
 namespace PizzaBox.Web.Models{
     public class Login : User

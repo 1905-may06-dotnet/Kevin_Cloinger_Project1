@@ -15,8 +15,8 @@ namespace PizzaBox.Web.Controllers{
             return View();
         }
         [HttpPost("Login")]
-        public IActionResult OnPost(string Email, string Password){
-            var user = new Login(Email,Password);
+        public IActionResult OnPost(string Email, string Pass){
+            var user = new Login(Email,Pass);
             if(user.CheckUser()){
                 HttpContext.Session.SetString("User", user.Email);
                 return RedirectToAction("Order","Order");
@@ -29,10 +29,17 @@ namespace PizzaBox.Web.Controllers{
             return View();
         }
         [HttpPost("SignUp")]
-        public IActionResult SignUp(string Email, string Password){
-            var user = new Login(Email, Password);
+        public IActionResult SignUp(string Email, string Pass){
+            var user = new Login(Email, Pass);
+            Console.WriteLine(Pass);
             HttpContext.Session.SetString("User", user.Email);
+            user.SaveUser();
             return RedirectToAction("Order","Order");
+        }
+        [HttpGet("Logout")]
+        public IActionResult SignOut(){
+            HttpContext.Session.Remove("User");
+            return RedirectToAction("Login");
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

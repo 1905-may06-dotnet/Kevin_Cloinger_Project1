@@ -8,15 +8,24 @@
 <h2>
     @order.Location
 </h2>
-<form asp-controller="OrderPizza" asp-action="PickedLocation" method="post" asp-for="Pizza">
+@foreach (var pizza in order.Pizzas)
+{
+    <h4>
+        You a @pizza.Size with this fine @pizza.Crust crust these fine toppings @pizza.Toppings for the low cost of $@pizza.Cost
+    </h4>
+}
+<h3>
+    @order.Cost
+</h3>
+<form asp-controller="OrderPizza" asp-action="PickedLocation" method="post" asp-for="Pizza" id="Submit">
     @Html.DropDownList("crust",
         new SelectList(Enum.GetValues(typeof(CrustTypes))),
         "Pick Crust",
-        new{@class = "form-control"})
+        new{@class = "form-control", required ="required"})
     @Html.DropDownList("size",
         new SelectList(Enum.GetValues(typeof(SizesTypes))),
         "Pick Size",
-        new{@class = "form-control"})
+        new{@class = "form-control", required ="required"})
     @for(int i=0;i<5;i++){
         <tr>
             <td>
@@ -28,4 +37,7 @@
         </tr>
     }
     <input type="submit" value="Submit">
+</form>
+<form asp-action="confirm" method="post" id="confirm">
+    <input type="submit" value="confirm">
 </form>

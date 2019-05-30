@@ -1,8 +1,45 @@
 ﻿using System;
 using System.Linq;
+using PizzaBox.Data;
 
 namespace PizzaBox.Domain
 {
+    public class Order : PizzaBox.Data.Order{
+        public bool CheckCost(){
+            if(this.Cost<5000m){
+                return true;
+            }
+            return false;
+        }
+        public bool CheckPizzaLimits(){
+            int number = this.Pizzas.Count;
+            if (number >=100){
+                return true;
+            }
+            return false;
+        }
+    }
+    public class User : PizzaBox.Data.User{
+        public User(string Email, string pass):base(Email,pass){}
+        public bool CanOrder(string location){
+            var order = GetLastOrder();
+            if(order==null){
+                return true;
+            }
+            if(BizLogic.CheckAllowOrderAtSameLocation(order.Time)&&
+               BizLogic.CheckAllowOrderOnlySameLocation(order.Time,location,order.Location)
+            ){return true;}
+            return false;
+        } 
+    }
+    public class Location : PizzaBox.Data.Location{
+        public Location(string name):base(name){}
+    }
+    public class Pizza : PizzaBox.Data.Pizza{
+        public Pizza(String size, String crust, String toppings):base(size,crust,toppings){
+            base.Cost = BizLogic.PizzaPrice(size,crust,toppings);
+        }
+    }
     public class BizLogic {
         static bool SetS=false;
         static public bool CheckAllowOrderAtSameLocation(DateTime OrderTime) {
@@ -33,18 +70,6 @@ namespace PizzaBox.Domain
             }
             return false;
         }
-        static public bool CheckNumberOfPizzas(int number){
-            if (number >=100){
-                return true;
-            }
-            return false;
-        }
-        static public bool CheckMaxCost(decimal cost){
-            if(cost<5000m){
-                return true;
-            }
-            return false;
-        }
         static public decimal PizzaPrice(String size, String crust, String toppings){
             decimal cost = 0;
             if(size=="small"){
@@ -55,8 +80,6 @@ namespace PizzaBox.Domain
                 cost = cost + 15;
             } else if (size == "xl"){
                 cost = cost + 20;
-            }else if (size =="phat"){
-                cost = cost + 30;
             }
             if(crust=="hand"&&crust=="tossed"&&crust=="hand tossed"){
                 cost = cost*1.2m;

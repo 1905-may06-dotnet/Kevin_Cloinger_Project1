@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using PizzaBox.Data;
+using PizzaBox.Domain;
 
 namespace PizzaBox.Client {
     public static class Helpers{
@@ -17,15 +17,15 @@ namespace PizzaBox.Client {
             }
         }
         public static void OrderHistory(User user){
-            List<Order> orders = user.GetOrders();
-            foreach(Order order in orders){ 
+            List<Data.Order> orders = user.GetOrders();
+            foreach(Data.Order order in orders){ 
                 if(order.Confirmed&&order!=null){
                     Console.WriteLine(order.Cost.ToString());
                     Console.WriteLine ($"You ordered pizzas from {order.Location} on {order.Time}");
                     Console.WriteLine($"You paid the low cost of {order.Cost}");
                     Console.WriteLine ("This order inculed the following pizzas.");
-                    List<Pizza> pizzas = order.GetPizzas();
-                    foreach(Pizza pizza in pizzas){
+                    List<Data.Pizza> pizzas = order.GetPizzas();
+                    foreach(Data.Pizza pizza in pizzas){
                         Console.WriteLine ($"The crust you picked is {pizza.Crust}");
                         Console.WriteLine ($"The size of your master piece is {pizza.Size}");
                         Console.WriteLine ($"This pizza cost {pizza.Cost}");
@@ -44,7 +44,7 @@ namespace PizzaBox.Client {
                     if(args[i] == "-l"&&i+1<=args.Length){
                         ShowSales(args[i+1]);
                     }else if(args[i]=="-s"){
-                        Set.SetS();
+                        BizLogic.SetCommand();
                     }else if(args[i]=="-H"){
                         Program.LogIn(out user);
                         Helpers.OrderHistory(user);
@@ -55,7 +55,7 @@ namespace PizzaBox.Client {
         }
         static void ShowSales(String locationName){
             var location = new Location(locationName);
-            List<Order> orders =location.GetOrders();
+            List<Data.Order> orders =location.GetOrders();
             decimal total =0m;
             foreach(Order order in orders){
                 if(order.Confirmed){

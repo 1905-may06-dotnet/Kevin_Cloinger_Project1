@@ -2,7 +2,6 @@
 using System.Linq;
 using System;
 using System.Collections.Generic;
-using PizzaBox.Data;
 using PizzaBox.Domain;
 
 namespace PizzaBox.Client {
@@ -29,16 +28,16 @@ namespace PizzaBox.Client {
             string input = Console.ReadLine ();
             input.ToLowerInvariant();
             if (input == "y") {
-                Console.WriteLine ("So you new here.");
+                Console.WriteLine ("Are you new here.");
                 Console.Write ("What is your Email?   ");
                 string userName = Console.ReadLine ();
-                Console.Write ("Kool now I need a good password?  ");
+                Console.Write ("I need a good password?  ");
                 string password = Console.ReadLine ();
                 user = new User (userName, password);
-                try{
                     user.SaveUser();
+                try{
                 }catch(Microsoft.EntityFrameworkCore.DbUpdateException){
-                    Console.WriteLine("Hum are you sure MAYBE you should try that again.");
+                    Console.WriteLine("Please try again.");
                     LogIn(out user);
                 }
                 return;
@@ -55,7 +54,7 @@ namespace PizzaBox.Client {
                     LogIn(out user);
                 }
             } else {
-                Console.WriteLine ("funny guy");
+                Console.WriteLine ("Wrong Password or Email");
                 LogIn (out user);
             }
         }
@@ -84,9 +83,9 @@ namespace PizzaBox.Client {
                 if(order.CheckCost()){
                     pizza = OrderPizza();
                     order.Pizzas.Add (pizza);
-                    order.Cost = pizza.Cost;
+                    order.Cost = order.Cost + pizza.Cost;
                     if(order.CheckPizzaLimits()){
-                        Console.WriteLine("sorry money bags that is ONE too many.");
+                        Console.WriteLine("Sorry we limit orders to $5000 dollars.");
                     }else{
                         
                         Console.WriteLine ($"So is {order.Pizzas.Count} enough.(Y/N)");
@@ -103,9 +102,9 @@ namespace PizzaBox.Client {
             string size, crust, topping, input;
             var toppings = new string[5];
             do {
-                Console.WriteLine ("What size would you like your to be pizza Small, Medium, Large, XL and Phat.");
+                Console.WriteLine ("What size would you like your to be pizza Small, Medium, Large and XL.");
                 size = Console.ReadLine ().ToLower();
-            } while (size != "small" && size != "medium" && size != "large" && size != "xl" && size != "phat");
+            } while (size != "small" && size != "medium" && size != "large" && size != "xl");
             do {
                 Console.WriteLine ("What crust type would you like Hand tossed, thin or thick");
                 crust = Console.ReadLine ().ToLower();
@@ -134,9 +133,8 @@ namespace PizzaBox.Client {
             string input;
             do{
                 Console.WriteLine("If every thing look great please confirm your order.");
-                Console.WriteLine("So we can start creating the cure for your case of hangry");
                 input=Console.ReadLine();
-                if(input=="n"||input=="N"){Console.WriteLine("SAD");}
+                if(input=="n"||input=="N"){Console.WriteLine("Sorry to see you go.");}
             }while(input!="y"&&input!="Y");
             order.Cost = order.Cost;
             order.Confirmed = true;

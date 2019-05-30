@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using PizzaBox.Domain;
+using PizzaBox.Data;
 
 namespace PizzaBox.Data
 {
@@ -15,7 +15,6 @@ namespace PizzaBox.Data
             this.size = size;
             this.crust = crust;
             this.toppings = toppings;
-            this.cost = BizLogic.PizzaPrice(size, crust, toppings);
         }
         [Key]
         public int PizzaId{get;set;}
@@ -31,6 +30,7 @@ namespace PizzaBox.Data
         }
         public decimal Cost {
             get => cost;
+            set => cost = value;
         }
         public string Toppings{
             get => toppings;
@@ -44,9 +44,10 @@ namespace PizzaBox.Data
             this.pass = Pass; 
         }
         public void SaveUser(){
-            using(UserDB context = new UserDB())
+            using(var context = new UserDB())
             {
-                context.User.Add(this);
+                User user = new User(this.Email,this.Pass);
+                context.User.Add(user);
                 context.SaveChanges();
             }
         }
@@ -81,7 +82,7 @@ namespace PizzaBox.Data
             }
             return orders;
         }
-        private Order GetLastOrder(){
+        public Order GetLastOrder(){
             UserDB context = new UserDB();
             var orderQuery =
                 from Order o in context.Order
@@ -89,16 +90,6 @@ namespace PizzaBox.Data
                 select o;
             return orderQuery.FirstOrDefault();
         }
-        public bool CanOrder(string location){
-            var order = GetLastOrder();
-            if(order==null){
-                return true;
-            }
-            if(BizLogic.CheckAllowOrderAtSameLocation(order.Time)&&
-               BizLogic.CheckAllowOrderOnlySameLocation(order.Time,location,order.Location)
-            ){return true;}
-            return false;
-        }   
     }
     public class Location{
         private string name;
@@ -126,12 +117,12 @@ namespace PizzaBox.Data
         private int id;
         private string location;
         private User customer;
-        private decimal cost;
+        public decimal cost;
         private bool confirmed = false;
         public bool Confirmed{get=>confirmed;set=>confirmed=value;}
         public decimal Cost 
         {   get => cost;
-            set => cost = cost+value;
+            set => cost = value;
         }
         public DateTime Time {get;set;}
         public IList<Pizza> Pizzas {get;set;} = new List<Pizza>();
@@ -139,13 +130,20 @@ namespace PizzaBox.Data
         public User Customer{get=>customer;set=>customer=value;}
         private UserDB context = new UserDB();
 
-        //public void Save(){
-        //     context.Order.Add(this);
-        //     context.User.Attach(this.customer);
-        //     context.SaveChanges();
-        //     return this.Id;
-        // }
+        public void Save(){
+            context.User.Attach(this.customer);
+            Order order = new Order();
+            order.Confirmed = this.Confirmed;
+            order.Cost = this.Cost;
+            order.Time = this.Time;
+            order.Pizzas = this.Pizzas;
+            order.Location = this.Location;
+            order.Customer = this.Customer;
+            context.Order.Add(order);
+            context.SaveChanges();
+        }
         public void Update(){
+            context.User.Attach(this.customer);
             context.Order.Update(this);
             context.SaveChanges();
         }
@@ -156,28 +154,10 @@ namespace PizzaBox.Data
                 where p.OrderId == this.id
                 select p;
             var pizzas = new List<Pizza>();
-            foreach(Pizza p in pizzasQuery){
+            foreach(var p in pizzasQuery){
                 pizzas.Add(p);
             }
             return pizzas;
-        }
-        public bool CheckPizzaLimits(){
-            if(BizLogic.CheckNumberOfPizzas(this.Pizzas.Count))
-            {
-                return true;
-            }
-            return false;
-        }
-        public bool CheckCost(){
-            if(BizLogic.CheckMaxCost(this.Cost)){
-                return true;
-            }
-            return false;
-        }
-    }
-    public class Set{
-        public static void SetS(){
-            BizLogic.SetCommand();
         }
     }
 }
