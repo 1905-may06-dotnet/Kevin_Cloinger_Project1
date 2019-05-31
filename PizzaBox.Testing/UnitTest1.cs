@@ -1,7 +1,6 @@
 using System.Reflection;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PizzaBox.Data;
 using PizzaBox.Domain;
 
 namespace PizzaBox.Testing

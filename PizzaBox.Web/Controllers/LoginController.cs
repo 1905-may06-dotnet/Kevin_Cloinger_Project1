@@ -31,7 +31,6 @@ namespace PizzaBox.Web.Controllers{
         [HttpPost("SignUp")]
         public IActionResult SignUp(string Email, string Pass){
             var user = new Login(Email, Pass);
-            Console.WriteLine(Email);
             HttpContext.Session.SetString("User", user.Email);
             user.SaveUser();
             return RedirectToAction("Order","Order");
