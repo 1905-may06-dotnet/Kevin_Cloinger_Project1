@@ -1,0 +1,34 @@
+using System.Runtime.ExceptionServices;
+using System;
+using System.Net;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
+using PizzaBox.Web.Models;
+
+namespace PizzaBox.Filters{
+    public class Filters: ActionFilterAttribute{
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            HttpContext ctx = HttpContext;
+            string User = ctx.Session.GetString("User");
+            if(something)
+            {
+                filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary {{ "Controller", "YourController" },
+                                            { "Action", "YourAction" } });
+            }
+            base.OnActionExecuting(filterContext);
+        }
+    // class LoginFilter : ActionFilterAttribute{
+    }
+    //     public override void OnActionExecuting(ActionExecutingContext filterContext){
+    //         string User = HttpContext.Session.GetString("User");
+    //         if(User == null){
+    //             RedirectToAction("Login","Login");
+    //         }
+    //     }
+    // }
+}

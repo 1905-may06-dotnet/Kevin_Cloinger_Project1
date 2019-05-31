@@ -9,7 +9,10 @@
       @Html.DropDownList("Location",
         new SelectList(Enum.GetValues(typeof(StoreLocations))),
         "Select Location",
-        new{@class = "form-control"})
+        new{@class = "form-control", required="required"})
       <input type="submit" value="Submit">
     </form>
 </div>
+<form asp-controller="History" asp-action="ShowHistory" method="get" id="History">
+    <input type="submit" value="History">
+</form>

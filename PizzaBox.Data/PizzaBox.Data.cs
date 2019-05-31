@@ -88,7 +88,7 @@ namespace PizzaBox.Data
                 from Order o in context.Order
                 orderby o.Time descending
                 select o;
-            return orderQuery.FirstOrDefault();
+            return orderQuery.First();
         }
     }
     public class Location{

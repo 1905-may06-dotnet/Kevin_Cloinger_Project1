@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using PizzaBox.Web.Models;
+//using PizzaBox.Filters;
 
 namespace PizzaBox.Web.Controllers
 {
@@ -17,6 +18,9 @@ namespace PizzaBox.Web.Controllers
         public IActionResult Order()
         {
             string User = HttpContext.Session.GetString("User");
+            if(User == null){
+                return RedirectToAction("Login","Login");
+            }
             var user = new Login(User);
             var order = new OrderWeb(user);
             return View();
@@ -24,6 +28,9 @@ namespace PizzaBox.Web.Controllers
         [HttpPost("Order")]
         public IActionResult PickedLocation(string location){
             string User = HttpContext.Session.GetString("User");
+            if(User == null){
+                return RedirectToAction("Login","Login");
+            }
             var user = new Login(User);
             var order = new OrderWeb(user, location);
             HttpContext.Session.SetObjectAsJson("order", order);
@@ -31,12 +38,23 @@ namespace PizzaBox.Web.Controllers
         }
         [HttpGet("OrderPizza")]
         public IActionResult OrderPizza(){
+            string User = HttpContext.Session.GetString("User");
+            if(User == null){
+                return RedirectToAction("Login","Login");
+            }
             var order = HttpContext.Session.GetObjectFromJson<OrderWeb>("order");
             ViewData["order"] = order;
             return View();
         }
         [HttpPost("OrderPizza")]
         public IActionResult SubmitPizza(string crust, string size, string[] toppings){
+            string User = HttpContext.Session.GetString("User");
+            if(User == null){
+                return RedirectToAction("Login","Login");
+            }
+            if(toppings[1]==null&&toppings[0]==null){
+                return RedirectToAction("OrderPizza");
+            }
             var pizza = new PizzaWeb(size, crust, toppings);
             OrderWeb order = (OrderWeb)HttpContext.Session.GetObjectFromJson<OrderWeb>("order");
             order.Pizzas.Add (pizza);
@@ -47,6 +65,10 @@ namespace PizzaBox.Web.Controllers
         }
         [HttpPost("Confirm")]
         public IActionResult Confirm(){
+            string User = HttpContext.Session.GetString("User");
+            if(User == null){
+                return RedirectToAction("Login","Login");
+            }
             OrderWeb order = (OrderWeb)HttpContext.Session.GetObjectFromJson<OrderWeb>("order");
             ViewData["order"] = order;
             order.Time = DateTime.Now;

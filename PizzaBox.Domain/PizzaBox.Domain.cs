@@ -23,7 +23,7 @@ namespace PizzaBox.Domain
         public User(string Email, string pass):base(Email,pass){}
         public bool CanOrder(string location){
             var order = GetLastOrder();
-            if(order==null){
+            if(order.Customer==null){
                 return true;
             }
             if(BizLogic.CheckAllowOrderAtSameLocation(order.Time)&&

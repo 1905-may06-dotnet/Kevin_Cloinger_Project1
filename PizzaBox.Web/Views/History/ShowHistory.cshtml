@@ -1,1 +1,58 @@
+@using PizzaBox.Web.Models;
+@using System.Collections.Generic;
+@{
+    var orders = ViewBag.Orders;
+    
+}
 <h1 font-size="20px">Stub</h1>
+<table class="table">
+    <tr>
+        <th scope="col">
+            Crust
+        </th>
+        <th scope="col">
+            Size
+        </th>
+        <th scope="col">
+            Toppings
+        </th>
+        <th scope="col">
+            Price
+        </th>
+        @foreach (var order in orders){
+            var pizzas = order.GetPizzas();
+            
+            @foreach (var pizza in pizzas)
+            {
+                <tr>
+                    <td>
+                        @pizza.Crust
+                    </td>
+                    <td>
+                        @pizza.Size
+                    </td>
+                    <td>
+                        @pizza.Toppings
+                    </td>
+                    <td>
+                        $@pizza.Cost
+                    </td>
+                </tr>
+            }
+            <tr>
+                <th>
+                    Total: 
+                </th>
+                <td>
+                    $@order.Cost
+                </td>
+                <th>
+                    On:
+                </th>  
+                <td>
+                    @order.Time.ToString()
+                </td>
+            </tr>
+        }
+    </tr>
+</table>

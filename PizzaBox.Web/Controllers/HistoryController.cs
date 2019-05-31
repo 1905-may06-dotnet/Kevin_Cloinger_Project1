@@ -15,9 +15,12 @@ namespace PizzaBox.Web.Controllers
         [HttpGet("History")]
         public IActionResult ShowHistory(){
             string User = HttpContext.Session.GetString("User");
+            if(User == null){
+                return RedirectToAction("Login","Login");
+            }
             Login user = new Login(User);
             var orders = user.GetOrders();
-            ViewData["orders"] = orders;
+            ViewBag.Orders = orders;
             return View();
         }
     }
