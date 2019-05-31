@@ -1,6 +1,7 @@
 @using PizzaBox.Web.Models
 @{
     OrderWeb order = (OrderWeb)ViewData["order"];
+    string top, topLabel;
 }
 <h1>
     @order.Customer.Email
@@ -18,21 +19,30 @@
     @order.Cost
 </h3>
 <form asp-controller="OrderPizza" asp-action="PickedLocation" method="post" asp-for="Pizza" id="Submit">
+    <label for="crust">Crust
     @Html.DropDownList("crust",
         new SelectList(Enum.GetValues(typeof(CrustTypes))),
         "Pick Crust",
         new{@class = "form-control", required ="required"})
+    </label>
+    <label for="size">Size
     @Html.DropDownList("size",
         new SelectList(Enum.GetValues(typeof(SizesTypes))),
         "Pick Size",
         new{@class = "form-control", required ="required"})
+    </label>
     @for(int i=0;i<5;i++){
         <tr>
             <td>
-                @Html.DropDownList($"toppings[{i}]",
-                    new SelectList(Enum.GetValues(typeof(ToppingsTypes))),
-                    "Pick Topping",
-                    new{@class = "form-control"})
+                @{top= $"Topping {i+1}";}
+
+                <label>
+                    @top
+                    @Html.DropDownList($"toppings[{i}]",
+                        new SelectList(Enum.GetValues(typeof(ToppingsTypes))),
+                        "Pick Topping",
+                        new{@class = "form-control"})
+                </label>
             </td>
         </tr>
     }
