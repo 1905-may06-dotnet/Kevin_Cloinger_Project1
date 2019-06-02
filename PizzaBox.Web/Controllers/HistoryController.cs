@@ -7,19 +7,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
+using PizzaBox.Domain;
 using PizzaBox.Web.Models;
 
 namespace PizzaBox.Web.Controllers
 {
     public class HistoryController : Controller{
+        private IRepoOrder repoOrder;
+        public HistoryController(IRepoOrder repoOrder){
+            this.repoOrder = repoOrder;
+        }
         [HttpGet("History")]
         public IActionResult ShowHistory(){
-            string User = HttpContext.Session.GetString("User");
+            string user = HttpContext.Session.GetString("User");
+            var User = new User(user);
             if(User == null){
                 return RedirectToAction("Login","Login");
             }
-            Login user = new Login(User);
-            var orders = user.GetOrders();
+            var orders = repoOrder.GetOrders(User);
             ViewBag.Orders = orders;
             return View();
         }

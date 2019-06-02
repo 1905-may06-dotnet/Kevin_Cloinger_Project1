@@ -6,10 +6,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using PizzaBox.Domain;
 using PizzaBox.Web.Models;
 
 namespace PizzaBox.Web.Controllers{
     public class LoginController : Controller{
+        private IRepoUser repoUser;
+        public LoginController(IRepoUser repoUser){
+            this.repoUser = repoUser;
+        }
         [HttpGet("Login")]
         public IActionResult Login(){
             return View();
@@ -17,7 +22,7 @@ namespace PizzaBox.Web.Controllers{
         [HttpPost("Login")]
         public IActionResult OnPost(string Email, string Pass){
             var user = new Login(Email,Pass);
-            if(user.CheckUser()){
+            if(repoUser.CheckUser(user)){
                 HttpContext.Session.SetString("User", user.Email);
                 return RedirectToAction("Order","Order");
             } else {
@@ -32,7 +37,7 @@ namespace PizzaBox.Web.Controllers{
         public IActionResult SignUp(string Email, string Pass){
             var user = new Login(Email, Pass);
             HttpContext.Session.SetString("User", user.Email);
-            user.SaveUser();
+            repoUser.Save(user);
             return RedirectToAction("Order","Order");
         }
         [HttpGet("Logout")]

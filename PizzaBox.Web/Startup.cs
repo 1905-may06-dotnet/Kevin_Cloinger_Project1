@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PizzaBox.Domain;
+using PizzaBox.Data;
 
 namespace PizzaBox.Web
 {
@@ -30,7 +32,9 @@ namespace PizzaBox.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            services.AddScoped<IRepoPizza, PizzaRepo>();
+            services.AddScoped<IRepoOrder, OrderRepo>();
+            services.AddScoped<IRepoUser, UserRepo>();
             services.AddDistributedMemoryCache();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSession(options => {

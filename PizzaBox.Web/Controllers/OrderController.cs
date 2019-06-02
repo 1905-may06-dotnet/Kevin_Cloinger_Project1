@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
+using PizzaBox.Domain;
 using PizzaBox.Web.Models;
 //using PizzaBox.Filters;
 
@@ -14,6 +15,10 @@ namespace PizzaBox.Web.Controllers
 {
     public class OrderController : Controller
     {
+        private IRepoOrder repoOrder;
+        public OrderController(IRepoOrder repoOrder){
+            this.repoOrder = repoOrder;
+        }
         [HttpGet("Order")]
         public IActionResult Order()
         {
@@ -22,7 +27,7 @@ namespace PizzaBox.Web.Controllers
                 return RedirectToAction("Login","Login");
             }
             var user = new Login(User);
-            var order = new OrderWeb(user);
+            var order = new Order(user);
             return View();
         }
         [HttpPost("Order")]
@@ -32,7 +37,7 @@ namespace PizzaBox.Web.Controllers
                 return RedirectToAction("Login","Login");
             }
             var user = new Login(User);
-            var order = new OrderWeb(user, location);
+            var order = new Order(user, location);
             HttpContext.Session.SetObjectAsJson("order", order);
             return RedirectToAction("OrderPizza");
         }
@@ -42,7 +47,7 @@ namespace PizzaBox.Web.Controllers
             if(User == null){
                 return RedirectToAction("Login","Login");
             }
-            var order = HttpContext.Session.GetObjectFromJson<OrderWeb>("order");
+            var order = HttpContext.Session.GetObjectFromJson<Order>("order");
             ViewData["order"] = order;
             return View();
         }
@@ -56,11 +61,10 @@ namespace PizzaBox.Web.Controllers
                 return RedirectToAction("OrderPizza");
             }
             var pizza = new PizzaWeb(size, crust, toppings);
-            OrderWeb order = (OrderWeb)HttpContext.Session.GetObjectFromJson<OrderWeb>("order");
+            Order order = HttpContext.Session.GetObjectFromJson<Order>("order");
             order.Pizzas.Add (pizza);
             order.Cost = order.Cost + pizza.Cost;
             HttpContext.Session.SetObjectAsJson("order", order);
-            Console.WriteLine(order.Cost);
             return RedirectToAction("OrderPizza");
         }
         [HttpPost("Confirm")]
@@ -69,11 +73,11 @@ namespace PizzaBox.Web.Controllers
             if(User == null){
                 return RedirectToAction("Login","Login");
             }
-            OrderWeb order = (OrderWeb)HttpContext.Session.GetObjectFromJson<OrderWeb>("order");
+            Order order = HttpContext.Session.GetObjectFromJson<Order>("order");
             ViewData["order"] = order;
             order.Time = DateTime.Now;
             order.Confirmed = true;
-            order.Save();
+            repoOrder.Save(order);
             return View();
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

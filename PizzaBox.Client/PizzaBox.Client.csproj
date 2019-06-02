@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\PizzaBox.Domain\PizzaBox.Domain.csproj" />
+    <ProjectReference Include="..\PizzaBox.Domain\PizzaBox.Domain.csproj" /> 
+    <ProjectReference Include="..\PizzaBox.Data\PizzaBox.Data.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

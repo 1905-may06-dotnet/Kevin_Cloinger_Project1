@@ -6,14 +6,20 @@ using PizzaBox.Domain;
 
 namespace PizzaBox.Client {
     public class Program {
+        public static IRepoOrder repoOrder;
+        public static IRepoPizza repoPizza;
+        public static IRepoUser repoUser;
         public static void Main (string[] args) {
-            var user = new User ("test", "test");
+            Domain.User user = new User ("test", "test");
             Helpers.CheckArgs(args);
+            Helpers.RepoSetup();
             LogIn (out user);
             var locations = Helpers.Setup();
             String location = PickALocation (user, locations);
-            if(user.CanOrder(location)){
-                Order order = MakeOrder (user, location);
+            Order Lastorder = repoOrder.GetLastOrder(user);
+            if(user.CanOrder(location,Lastorder)){
+                Order order = MakeOrder(user, location);
+                Console.WriteLine("bob"+order.Pizzas[0].Crust);
                 Helpers.ShowOrder (order);
                 ConfirmOrder(order);
             }
@@ -34,7 +40,7 @@ namespace PizzaBox.Client {
                 Console.Write ("I need a good password?  ");
                 string password = Console.ReadLine ();
                 user = new User (userName, password);
-                    user.SaveUser();
+                    repoUser.Save(user);
                 try{
                 }catch(Microsoft.EntityFrameworkCore.DbUpdateException){
                     Console.WriteLine("Please try again.");
@@ -48,7 +54,7 @@ namespace PizzaBox.Client {
                 Console.Write ("Password?  ");
                 string pass = Console.ReadLine ();
                 user = new User(email, pass);
-                if(user.CheckUser()){
+                if(repoUser.CheckUser(user)){
                     return;
                 }else{
                     LogIn(out user);
@@ -74,6 +80,7 @@ namespace PizzaBox.Client {
             return l.Name;
         }
         static Order MakeOrder (User user, String location) {
+            
             var order = new Order ();
             order.Location = location;
             order.Customer = user;
@@ -82,7 +89,8 @@ namespace PizzaBox.Client {
                 Pizza pizza;
                 if(order.CheckCost()){
                     pizza = OrderPizza();
-                    order.Pizzas.Add (pizza);
+                    Console.WriteLine("bob2"+pizza.Crust);
+                    order.Pizzas.Add(pizza);
                     order.Cost = order.Cost + pizza.Cost;
                     if(order.CheckPizzaLimits()){
                         Console.WriteLine("Sorry we limit orders to $5000 dollars.");
@@ -95,20 +103,20 @@ namespace PizzaBox.Client {
                     Console.WriteLine("Sorry we know your hungry but we limit orders to 100 pizzas.");
                 }
             }while(iii != "y" && iii != "Y");
-            order.Update();
+            repoOrder.Update(order);
             return order;
         }
         static Pizza OrderPizza () {
-            string size, crust, topping, input;
-            var toppings = new string[5];
+            string Size, Crust, Topping, input;
+            var Toppings = new string[5];
             do {
                 Console.WriteLine ("What size would you like your to be pizza Small, Medium, Large and XL.");
-                size = Console.ReadLine ().ToLower();
-            } while (size != "small" && size != "medium" && size != "large" && size != "xl");
+                Size = Console.ReadLine ().ToLower();
+            } while (Size != "small" && Size != "medium" && Size != "large" && Size != "xl");
             do {
                 Console.WriteLine ("What crust type would you like Hand tossed, thin or thick");
-                crust = Console.ReadLine ().ToLower();
-            } while (crust != "hand" && crust != "tossed" && crust != "thin" && crust != "thick" && crust != "hand tossed");
+                Crust = Console.ReadLine ().ToLower();
+            } while (Crust != "hand" && Crust != "tossed" && Crust != "thin" && Crust != "thick" && Crust != "hand tossed");
             for (int i = 0; i < 5; i++) {
                 if(i>=2){
                     Console.Write ("do you want more on the pizza? (Y/N)");
@@ -120,26 +128,26 @@ namespace PizzaBox.Client {
                 do {
                     Console.WriteLine ("So what topping do what do you really really want?");
                     Console.WriteLine ("BACON, ham, mushrooms, meat and cheese");
-                    topping = Console.ReadLine ().ToLower();
-                } while (topping != "bacon" && topping != "ham" && topping != "mushrooms" && topping != "meat" && topping != "cheese");
-                toppings[i] = topping;
+                    Topping = Console.ReadLine ().ToLower();
+                } while (Topping != "bacon" && Topping != "ham" && Topping != "mushrooms" && Topping != "meat" && Topping != "cheese");
+                Toppings[i] = Topping;
             }
-            string toppingsOut = string.Join(",", toppings);
-            toppingsOut = toppingsOut.TrimEnd(',');
-            var pizza = new Pizza (size, crust, toppingsOut);
+            string ToppingsOut = string.Join(",", Toppings);
+            ToppingsOut = ToppingsOut.TrimEnd(',');
+            var pizza = new Pizza (Size, Crust, ToppingsOut);
             return pizza;
         }
-        static void ConfirmOrder(Order order){
+        static void ConfirmOrder(Domain.Order order){
             string input;
             do{
                 Console.WriteLine("If every thing look great please confirm your order.");
                 input=Console.ReadLine();
                 if(input=="n"||input=="N"){Console.WriteLine("Sorry to see you go.");}
             }while(input!="y"&&input!="Y");
-            order.Cost = order.Cost;
             order.Confirmed = true;
             order.Time = DateTime.Now;
-            order.Update();
+            //order.Customer = user;
+            repoOrder.Save(order);
         }
     }
 }

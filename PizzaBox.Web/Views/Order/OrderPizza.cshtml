@@ -1,7 +1,7 @@
-@using PizzaBox.Web.Models
+@using PizzaBox.Domain
 @{
-    OrderWeb order = (OrderWeb)ViewData["order"];
-    string top, topLabel;
+    Order order = (Order)ViewData["order"];
+    string top;
 }
 <h1>
     @order.Customer.Email

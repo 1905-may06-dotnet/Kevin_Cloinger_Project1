@@ -1,10 +1,30 @@
 ﻿using System;
 using System.Linq;
-using PizzaBox.Data;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace PizzaBox.Domain
 {
-    public class Order : PizzaBox.Data.Order{
+    public class Order {
+        public int Id;
+        public decimal Cost;
+        public bool Confirmed;
+        public DateTime Time;
+        public List<Pizza> Pizzas = new List<Pizza>();
+        public string Location;
+        public User Customer;
+        [JsonConstructor]
+        public Order(){}
+        public Order(User user){
+            this.Customer = user;
+            this.Cost = 0m;
+        }
+        public Order(User user, string location){
+            this.Customer = user;
+            this.Cost = 0m;
+            this.Location = location;
+        }
+
         public bool CheckCost(){
             if(this.Cost<5000m){
                 return true;
@@ -19,11 +39,21 @@ namespace PizzaBox.Domain
             return false;
         }
     }
-    public class User : PizzaBox.Data.User{
-        public User(string Email, string pass):base(Email,pass){}
-        public bool CanOrder(string location){
-            var order = GetLastOrder();
-            if(order.Customer==null){
+    public class User {
+        public string Email,Pass;
+        [JsonConstructor]
+        public User(){}
+        public User(string Email, string pass){
+            this.Email = Email;
+            this.Pass = pass;
+        }
+        
+        public User(string Email){
+            this.Email = Email;
+            this.Pass = "NONE";
+        }
+        public bool CanOrder(string location, Order order){
+            if(order==null){
                 return true;
             }
             if(BizLogic.CheckAllowOrderAtSameLocation(order.Time)&&
@@ -32,12 +62,20 @@ namespace PizzaBox.Domain
             return false;
         } 
     }
-    public class Location : PizzaBox.Data.Location{
-        public Location(string name):base(name){}
+    public class Location {
+        public string Name{get;set;}
+        public Location(String Name){
+            this.Name = Name;
+        }
     }
-    public class Pizza : PizzaBox.Data.Pizza{
-        public Pizza(String size, String crust, String toppings):base(size,crust,toppings){
-            base.Cost = BizLogic.PizzaPrice(size,crust,toppings);
+    public class Pizza {
+        public decimal Cost;
+        public string Size,Crust,Toppings;
+        public Pizza(String size, String crust, String toppings){
+            this.Size =size;
+            this.Crust = crust;
+            this.Toppings = toppings;
+            Cost = BizLogic.PizzaPrice(size,crust,toppings);
         }
     }
     public class BizLogic {
