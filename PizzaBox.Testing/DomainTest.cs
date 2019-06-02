@@ -6,7 +6,7 @@ using PizzaBox.Domain;
 namespace PizzaBox.Testing
 {
     [TestClass]
-    public class UnitTest1
+    public class DomainTest
     {
         [TestMethod]
         public void testPizzaCon(){
@@ -49,22 +49,43 @@ namespace PizzaBox.Testing
         }
         [TestMethod]
         public void TrueCheckNumberOfPizzas(){
-            var result = BizLogic.CheckNumberOfPizzas(100);
-            Assert.AreEqual(false,result);
-        }
-        [TestMethod]
-        public void FalseCheckNumberOfPizzas(){
-            var result = BizLogic.CheckNumberOfPizzas(101);
+            Order order = new Order();
+            for(int i=0;i<100;i++){
+                Pizza pizza = new Pizza("small", "thin", "bacon,ham");
+                order.Pizzas.Add(pizza);
+            }
+            var result = order.CheckPizzaLimits();
             Assert.AreEqual(true,result);
         }
         [TestMethod]
+        public void FalseCheckNumberOfPizzas(){
+            Order order = new Order();
+            for(int i=0;i<101;i++){
+                Pizza pizza = new Pizza("small", "thin", "bacon,ham");
+                order.Pizzas.Add(pizza);
+            }
+            var result = order.CheckPizzaLimits();
+            Assert.AreEqual(false,result);
+        }
+        [TestMethod]
         public void TrueCheckMaxCost(){
-            var result = BizLogic.CheckMaxCost(4999.99m);
+            Order order = new Order();
+            for(int i=0;i<100;i++){
+                Pizza pizza = new Pizza("xl", "thin", "bacon,ham");
+                order.Pizzas.Add(pizza);
+            }
+            var result = order.CheckCost();
             Assert.AreEqual(true,result);
         }
         [TestMethod]
         public void FalseCheckMaxCost(){
-            var result = BizLogic.CheckMaxCost(5000.01m);
+            Order order = new Order();
+            for(int i=0;i<100;i++){
+                Pizza pizza = new Pizza("xl", "thick", "bacon,ham,ham,ham,meat");
+                order.Pizzas.Add(pizza);
+                order.Cost = order.Cost + pizza.Cost;
+            }
+            var result = order.CheckCost();
             Assert.AreEqual(false,result);
         }
     }

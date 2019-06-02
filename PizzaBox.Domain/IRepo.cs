@@ -9,6 +9,7 @@ namespace PizzaBox.Domain{
         List<Order> GetOrders(Location location);
         Order GetLastOrder(User user);
         void Save(Order order);
+        void SaveWithUser(Order order);
         //void Update(Order order);
     }
     public interface IRepoUser{

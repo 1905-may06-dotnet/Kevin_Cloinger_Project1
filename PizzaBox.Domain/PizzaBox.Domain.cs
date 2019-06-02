@@ -26,6 +26,7 @@ namespace PizzaBox.Domain
         }
 
         public bool CheckCost(){
+            Console.WriteLine(this.Cost);
             if(this.Cost<5000m){
                 return true;
             }
@@ -33,10 +34,10 @@ namespace PizzaBox.Domain
         }
         public bool CheckPizzaLimits(){
             int number = this.Pizzas.Count;
-            if (number >=100){
-                return true;
+            if (number>100){
+                return false;
             }
-            return false;
+            return true;
         }
     }
     public class User {
@@ -121,6 +122,8 @@ namespace PizzaBox.Domain
             }
             if(crust=="hand"&&crust=="tossed"&&crust=="hand tossed"){
                 cost = cost*1.2m;
+            }else if(crust=="thick")
+            {
                 cost = cost*1.5m;
             }
             int count = toppings.Count(s => s.Equals(','))+1;

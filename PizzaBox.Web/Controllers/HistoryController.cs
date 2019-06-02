@@ -28,5 +28,9 @@ namespace PizzaBox.Web.Controllers
             ViewBag.Orders = orders;
             return View();
         }
+        [Route("Sorry")]
+        public IActionResult Sorry(){
+            return View();
+        }
     }
 }

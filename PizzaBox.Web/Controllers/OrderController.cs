@@ -37,9 +37,13 @@ namespace PizzaBox.Web.Controllers
                 return RedirectToAction("Login","Login");
             }
             var user = new Login(User);
-            var order = new Order(user, location);
-            HttpContext.Session.SetObjectAsJson("order", order);
-            return RedirectToAction("OrderPizza");
+            Order Lastorder = repoOrder.GetLastOrder(user);
+            if(user.CanOrder(location,Lastorder)){
+                var order = new Order(user, location);
+                HttpContext.Session.SetObjectAsJson("order", order);
+                return RedirectToAction("OrderPizza");
+            }
+            return RedirectToAction("Sorry","History");
         }
         [HttpGet("OrderPizza")]
         public IActionResult OrderPizza(){
@@ -77,7 +81,7 @@ namespace PizzaBox.Web.Controllers
             ViewData["order"] = order;
             order.Time = DateTime.Now;
             order.Confirmed = true;
-            repoOrder.Save(order);
+            repoOrder.SaveWithUser(order);
             return View();
         }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

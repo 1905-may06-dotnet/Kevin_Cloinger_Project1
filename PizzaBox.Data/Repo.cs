@@ -60,6 +60,12 @@ namespace PizzaBox.Data{
             context.Order.Add(Dorder);
             context.SaveChanges();
         }
+        public void SaveWithUser(Domain.Order order){
+            Data.Order Dorder = Mapper.DomOrder2DataOrder(order);
+            context.Attach(Dorder.Customer);
+            context.Order.Add(Dorder);
+            context.SaveChanges();
+        }
     }
     public class UserRepo : IRepoUser{
         private UserDB context = new UserDB();

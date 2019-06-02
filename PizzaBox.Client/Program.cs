@@ -19,7 +19,6 @@ namespace PizzaBox.Client {
             Order Lastorder = repoOrder.GetLastOrder(user);
             if(user.CanOrder(location,Lastorder)){
                 Order order = MakeOrder(user, location);
-                Console.WriteLine("bob"+order.Pizzas[0].Crust);
                 Helpers.ShowOrder (order);
                 ConfirmOrder(order);
             }
@@ -103,7 +102,7 @@ namespace PizzaBox.Client {
                     Console.WriteLine("Sorry we know your hungry but we limit orders to 100 pizzas.");
                 }
             }while(iii != "y" && iii != "Y");
-            repoOrder.Update(order);
+            repoOrder.Save(order);
             return order;
         }
         static Pizza OrderPizza () {
