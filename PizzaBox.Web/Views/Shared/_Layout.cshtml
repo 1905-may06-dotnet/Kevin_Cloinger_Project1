@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -31,15 +32,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="SignUp">New Here</a>
-                        </li>
-                         <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="SignOut">Login</a>
-                        </li>
+                        @if(string.IsNullOrEmpty(Context.Session.GetString("User"))){
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Log in</a>
+                            </li>
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="SignUp">New Here</a>
+                            </li>
+                        }else{
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="SignOut">Log out</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>

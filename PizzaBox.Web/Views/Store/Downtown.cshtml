@@ -1,0 +1,26 @@
+@using System.Collections.Generic;
+@{
+    var orders = ViewBag.Orders;
+    var pizzaRepo = ViewBag.Pizza;
+}
+<h1 font-size="20px">Order History</h1>
+<table class="table">
+    <tr>
+        @foreach (var order in orders){
+            <tr>
+                <th>
+                    Total: 
+                </th>
+                <td>
+                    $@order.Cost
+                </td>
+                <th>
+                    On:
+                </th>  
+                <td>
+                    @order.Time.ToString()
+                </td>
+            </tr>
+        }
+    </tr>
+</table>

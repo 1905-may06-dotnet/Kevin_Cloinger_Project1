@@ -14,8 +14,10 @@ namespace PizzaBox.Web.Controllers
 {
     public class HistoryController : Controller{
         private IRepoOrder repoOrder;
-        public HistoryController(IRepoOrder repoOrder){
+        private IRepoPizza repoPizza;
+        public HistoryController(IRepoOrder repoOrder, IRepoPizza repoPizza){
             this.repoOrder = repoOrder;
+            this.repoPizza = repoPizza;
         }
         [HttpGet("History")]
         public IActionResult ShowHistory(){
@@ -26,10 +28,15 @@ namespace PizzaBox.Web.Controllers
             }
             var orders = repoOrder.GetOrders(User);
             ViewBag.Orders = orders;
+            ViewBag.Pizza = repoPizza;
             return View();
         }
         [Route("Sorry")]
         public IActionResult Sorry(){
+            string User = HttpContext.Session.GetString("User");
+            if(User == null){
+                return RedirectToAction("Login","Login");
+            }
             return View();
         }
     }

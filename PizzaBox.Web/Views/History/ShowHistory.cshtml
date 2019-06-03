@@ -1,10 +1,9 @@
-@using PizzaBox.Web.Models;
 @using System.Collections.Generic;
 @{
     var orders = ViewBag.Orders;
-    
+    var pizzaRepo = ViewBag.Pizza;
 }
-<h1 font-size="20px">Stub</h1>
+<h1 font-size="20px">Order History</h1>
 <table class="table">
     <tr>
         <th scope="col">
@@ -20,8 +19,7 @@
             Price
         </th>
         @foreach (var order in orders){
-            var pizzas = order.GetPizzas();
-            
+            var pizzas = pizzaRepo.GetPizzas(order);
             @foreach (var pizza in pizzas)
             {
                 <tr>

@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Net;
 using System;
 using System.Collections.Generic;
@@ -66,9 +67,11 @@ namespace PizzaBox.Web.Controllers
             }
             var pizza = new PizzaWeb(size, crust, toppings);
             Order order = HttpContext.Session.GetObjectFromJson<Order>("order");
-            order.Pizzas.Add (pizza);
-            order.Cost = order.Cost + pizza.Cost;
-            HttpContext.Session.SetObjectAsJson("order", order);
+            if(order.CheckPizzaLimits() && order.CheckCost()){
+                order.Pizzas.Add (pizza);
+                order.Cost = order.Cost + pizza.Cost;
+                HttpContext.Session.SetObjectAsJson("order", order);
+            }
             return RedirectToAction("OrderPizza");
         }
         [HttpPost("Confirm")]
