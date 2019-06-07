@@ -1,23 +1,39 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
+# ASP.NET Core
+
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'windows-2019'
 
 variables:
-  solution: '**/*.sln'
-  pathtoproject: '**/PizzaBox.Web.csproj'
-  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  projectPath: '**/PizzaBox.Web'
+  pathSolution: '$(System.DefaultWorkingDirectory)'
+  #pathToTest: 'PizzaBoxCustomer/PizzaBoxTest'
+
 steps:
-- task: VSBuild@1
+- script: dotnet build --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
+  workingDirectory: $(pathSolution)
+
+#- script: dotnet test --configuration $(buildConfiguration) --no-build
+#  workingDirectory: $(pathSolution)
+#  displayName: 'dotnet PizzaBoxTest'
+
+- task: DotNetCoreCLI@2
   inputs:
-    solution: '$(solution)'
-    #msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'publish'
+    projects: '$(projectPath)/*.csproj'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial(633e8b2e-a8e5-4703-a53e-e0247151c362)'
+    appType: 'webApp'
+    WebAppName: 'PIzzaBoxWeb'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
