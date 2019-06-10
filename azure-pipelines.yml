@@ -28,7 +28,9 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
+    publishWebProjects: false
     projects: '$(projectPath)/*.csproj'
+    zipAfterPublish: true
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -36,4 +38,4 @@ steps:
     azureSubscription: 'Free Trial(f76f9b2a-8aaa-49c1-b980-cd3c8191f17a)'
     appType: 'webApp'
     WebAppName: 'pizzaboxkevin'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/$(projectPath)/**/*.zip'
