@@ -32,13 +32,13 @@ steps:
 #  workingDirectory: $(pathSolution)
 #  displayName: 'dotnet PizzaBoxTest'
 
+- task: SonarCloudAnalyze@1
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     publishWebProjects: false
     projects: '$(projectPath)/*.csproj'
     zipAfterPublish: true
-- task: SonarCloudAnalyze@1
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
