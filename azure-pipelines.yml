@@ -15,6 +15,13 @@ variables:
   projectPath: '**/PizzaBox.Web'
   pathSolution: '$(System.DefaultWorkingDirectory)'
   #pathToTest: 'PizzaBoxCustomer/PizzaBoxTest'
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'team2-skep'
+    organization: 'sarasfox-github'
+    scannerMode: 'MSBuild'
+    projectKey: 'cd2c1e830934f5cf027a8791cf9927dc7d5884c1'
+    projectName: 'pizzabox'
 
 steps:
 - script: dotnet build --configuration $(buildConfiguration)
@@ -31,7 +38,7 @@ steps:
     publishWebProjects: false
     projects: '$(projectPath)/*.csproj'
     zipAfterPublish: true
-
+- task: SonarCloudAnalyze@1
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
