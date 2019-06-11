@@ -15,6 +15,7 @@ variables:
   projectPath: '**/PizzaBox.Web'
   pathSolution: '$(System.DefaultWorkingDirectory)'
   #pathToTest: 'PizzaBoxCustomer/PizzaBoxTest'
+steps:
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'team2-skep'
@@ -23,7 +24,6 @@ variables:
     projectKey: 'cd2c1e830934f5cf027a8791cf9927dc7d5884c1'
     projectName: 'pizzabox'
 
-steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
   workingDirectory: $(pathSolution)
